@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wyatt Bordeaux | ESP32 IMU Telemetry Pipeline</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="project.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js"></script>
+</head>
+<body>
+
+  <header class="project-hero">
+    <div class="project-hero-bg">
+      <img src="images/ESP32_IMU.png" alt="Project hero image" class="project-hero-img" />
+      <div class="project-hero-overlay"></div>
+    </div>
+    <div class="project-hero-content">
+      <div class="project-tags" style="margin-bottom:1rem;">
+        <span class="ptag">Sensor Fusion</span>
+        <span class="ptag">Embedded Systems</span>
+        <span class="ptag">IMU</span>
+      </div>
+
+      <h1 class="project-hero-title">ESP32 IMU Telemetry Pipeline</h1>
+      <p class="project-hero-sub">Real-time 3D attitude estimation using ESP-NOW and the Madgwick filter.</p>
+
+      <div class="project-hero-meta">
+        <span><i class="ph ph-calendar-blank"></i> January-May 2026</span>
+        <span><i class="ph ph-check-circle"></i> Completed</span>
+      </div>
+
+      <div class="project-hero-links">
+        <a href="https://github.com/ButterCaptain/ESP32-IMU-Telemetry" target="_blank" class="contact-chip">
+          <i class="ph ph-github-logo"></i> GitHub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="project-body-wrap">
+
+    <!-- ── Overview ──────────────────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">Overview</h2>
+      <p>
+        This project is a complete, low-latency attitude estimation and telemetry pipeline modeled directly after real aerospace ground stations. It utilizes two ESP32 microcontrollers, an MPU6050 IMU, and a custom Node.js/WebSocket bridge to render a live 3D visualization in the browser. By bypassing standard Wi-Fi and IP networks entirely, the system achieves a highly robust, zero-latency data link.
+    </section>
+
+    <!-- ── Problem & Motivation ───────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">Problem &amp; Motivation</h2>
+      <p>
+        When attempting to stream sensor telemetry over standard HTTP/Wi-Fi, the update rate capped at an unusable 2–4 Hz due to TCP handshake and JSON serialization overhead. My motivation was to solve this latency bottleneck by engineering a true connectionless, peer-to-peer radio link. I wanted to move beyond basic microcontroller projects and build an end-to-end architecture that mirrors how real flight vehicles communicate with ground control.
+    </section>
+
+    <!-- ── Screenshots ───────────────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">Media</h2>
+      <div class="proj-media-stack">
+
+       <figure class="proj-screenshot">
+          <video autoplay loop muted playsinline class="proj-video">
+            <source src="Movies/Gimbal.mp4" type="video/mp4" />
+          </video>
+          <figcaption>Demonstraction of Gimbal Lock</figcaption>
+        </figure>
+
+        <figure class="proj-screenshot">
+          <img src="images/IMU_Sensor.png" alt="Screenshot 2" />
+          <figcaption>IMU Sensor</figcaption>
+        </figure>
+
+       <figure class="proj-screenshot">
+          <video autoplay loop muted playsinline class="proj-video">
+            <source src="Movies/Demo.mp4" type="video/mp4" />
+          </video>
+          <figcaption>Final Demo</figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- ── Technical Details ─────────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">Technical Details</h2>
+      <p>
+        The system relies on a custom C++ firmware architecture that eliminates serialization overhead in favor of raw binary transmission. Data flows seamlessly from an I2C sensor to a connectionless radio link, over USB serial, and finally to a browser-based Three.js dashboard.
+      </p>
+
+      <ul class="proj-list">
+        <li>Sensor Fusion: Implemented the Madgwick AHRS filter to fuse accelerometer and gyroscope data into a gimbal-lock-free quaternion.</li>
+        <li>Binary Telemetry Link: Utilized ESP-NOW and #pragma pack(1) memory alignment to transmit a perfectly packed 16-byte struct, bypassing the Wi-Fi stack entirely.</li>
+        <li>Data Parsing: Engineered a Node.js hardware bridge that hunts for a custom 0xAA 0xBB sync beacon to extract clean packets from a continuous, raw USB serial stream.</li>
+      </ul>
+    </section>
+
+    <!-- ── What I Learned ────────────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">What I Learned</h2>
+      <p>
+        This project was a deep dive into the limitations of standard web protocols for real-time hardware applications. I gained significant hands-on experience with embedded sensor fusion algorithms, memory alignment, and writing custom parsers for raw binary data streams. Ultimately, it taught me how to think systematically about latency, network overhead, and data integrity when designing complex embedded systems.
+      </p>
+    </section>
+
+    <!-- ── Next Steps (optional) ─────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">Next Steps</h2>
+      <p>
+        Moving forward, I plan to integrate a magnetometer to transition the system to a full 9-DOF AHRS, providing an absolute yaw reference. I also intend to implement an adaptive gain parameter to automatically adjust filter weights during high-G linear acceleration maneuvers.
+    </section>
+
+  </main>
+
+  <!-- Footer (same as index) -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <p class="footer-name">Wyatt Bordeaux</p>
+      <p class="footer-copy">&copy; <span id="year"></span> · Built with purpose in Las Vegas, NV</p>
+      <div class="footer-links">
+        <a href="mailto:Wyatt.l.bordeaux@gmail.com"><i class="ph ph-envelope-simple"></i></a>
+        <a href="https:www.linkedin.com/in/wyatt-bordeaux" target="_blank"><i class="ph ph-linkedin-logo"></i></a>
+        <a href="Files/Resume_2026.pdf" target="_blank"><i class="ph ph-file-text"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
