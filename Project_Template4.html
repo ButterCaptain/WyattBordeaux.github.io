@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wyatt Bordeaux | Microcontroller-Based RFID Access Control System</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="project.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js"></script>
+</head>
+<body>
+  <header class="project-hero">
+    <div class="project-hero-bg">
+      <img src="Images/Small_FM.jpg" alt="Project hero image" class="project-hero-img" />
+      <div class="project-hero-overlay"></div>
+    </div>
+    <div class="project-hero-content">
+      <div class="project-tags" style="margin-bottom:1rem;">
+        <span class="ptag">C++</span>
+        <span class="ptag">GNU Radio</span>
+        <span class="ptag">DSP</span>
+      </div>
+      <h1 class="project-hero-title">Software-Defined FM Radio Receiver</h1>
+      <p class="project-hero-sub">Turning raw RF math into real-time audio using Python, digital signal processing, and a $25 USB dongle.</p>
+
+      <div class="project-hero-meta">
+        <span><i class="ph ph-calendar-blank"></i> January 2026 - June 2026</span>
+        <span><i class="ph ph-check-circle"></i> Completed</span>
+      </div>
+
+      <div class="project-hero-links">
+        <a href="https://github.com/ButterCaptain/FM-Receiver" target="_blank" class="contact-chip">
+          <i class="ph ph-github-logo"></i> GitHub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="project-body-wrap">
+
+    <!-- ── Overview ──────────────────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">Overview</h2>
+      <p>
+        I built a working FM radio receiver entirely in software, replacing traditional analog hardware decoders with a $25 RTL-SDR dongle and custom code. Inspired by a signals and systems course, I wanted to explore how digital signal processing (DSP) can be used to transform raw baseband IQ samples into live audio using just a CPU. The project successfully executes the entire signal chain in real-time, including frequency shifting, lowpass filtering, FM demodulation, and de-emphasis. To push my understanding further, I later rewrote the entire system from scratch in C++, manually building the filter classes and delay lines to see exactly how the math works under the hood.
+      </p>
+    </section>
+
+    <!-- ── Problem & Motivation ───────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">Problem &amp; Motivation</h2>
+      <p>
+        Real-time DSP introduces strict performance bottlenecks, and my initial single-threaded architecture couldn't process the math fast enough to keep up with the hardware, resulting in sample drops and severe audio lag. I solved this by decoupling the system into a three-stage multithreaded pipeline with dedicated queues for hardware I/O, DSP processing, and audio callbacks. Later, I had to track down a persistent popping artifact in the audio. I isolated the issue to the polar discriminator defaulting to a complex zero at the boundary of data chunks, causing a massive phase jump. I fixed it by explicitly carrying the last sample and filter states across chunk boundaries to maintain mathematical continuity.
+      </p>
+    </section>
+
+    <!-- ── Screenshots ───────────────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">Screenshots</h2>
+      <div class="proj-screenshot-grid">
+
+        <figure class="proj-screenshot">
+          <img src="Images/Layout.jpg" alt="Screenshot 1" />
+          <figcaption>Equipment Layout</figcaption>
+        </figure>
+
+        <figure class="proj-screenshot">
+          <img src="Images/Large_FM.jpg" alt="Screenshot 2" />
+          <figcaption>10 inch Whip Antenna</figcaption>
+        </figure>
+        <figure class="proj-screenshot">
+          <img src="Images/Small_FM.jpg" alt="Screenshot 2" />
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- ── Technical Details ─────────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">Technical Details</h2>
+      <p>
+        The system processes raw IQ samples at 2.4 MHz and decimates them down to 48 kHz audio. To avoid the hardware DC spike inherent to zero-IF receivers, I utilized an offset tuning technique, sampling 250 kHz off-target and digitally shifting the frequency back in software. For FM demodulation, I implemented a polar discriminator that calculates instantaneous frequency deviation by measuring phase changes between consecutive samples bypassing the need for a hardware Phase-Locked Loop (PLL). Finally, I applied an Infinite Impulse Response (IIR) de-emphasis filter with a standard 75 µs time constant to correct the transmitter's pre-emphasis and restore audio fidelity.
+    </section>
+
+    <!-- ── What I Learned ────────────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">What I Learned</h2>
+      <p>
+        Building this gave me a highly practical intuition for digital signal processing that bridged the gap between classroom theory and real-world application. I learned how to architect real-time multithreaded data pipelines and properly manage statefulness across sample chunks. The C++ rewrite was particularly valuable; by manually implementing the filter history buffers, custom thread-safe queues, and the full atan2 discriminator math without relying on Python's scipy or numpy libraries, I gained a much deeper understanding of how DSP algorithms fundamentally operate at the memory level.
+      </p>
+    </section>
+
+    <!-- ── Next Steps (optional) ─────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">Next Steps</h2>
+      <p>
+        Moving forward, I plan to implement stereo FM decoding by extracting the 19 kHz pilot tone and the 38 kHz difference signal. I also intend to refactor the Python version's state management into a cleaner, object-oriented DSPProcessor class, expose station and gain controls via CLI arguments, and eventually build a live FFT waterfall display to visualize the RF spectrum dynamically.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- Footer (same as index) -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <p class="footer-name">Wyatt Bordeaux</p>
+      <p class="footer-copy">&copy; <span id="year"></span> · Built with purpose in Las Vegas, NV</p>
+      <div class="footer-links">
+        <a href="mailto:Wyatt.l.bordeaux@gmail.com"><i class="ph ph-envelope-simple"></i></a>
+        <a href="https:www.linkedin.com/in/wyatt-bordeaux" target="_blank"><i class="ph ph-linkedin-logo"></i></a>
+        <a href="Files/Resume_2026.pdf" target="_blank"><i class="ph ph-file-text"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
