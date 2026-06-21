@@ -1,0 +1,319 @@
+
+.back-btn {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-condensed);
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: rgba(10, 10, 11, 0.4);
+  backdrop-filter: blur(8px);
+  padding: 0.6rem 1.2rem;
+  border: 1px solid var(--gray-600);
+  border-radius: 2px;
+  transition: all 0.3s var(--ease);
+}
+
+.back-btn:hover {
+  border-color: var(--scarlet);
+  background: rgba(200, 16, 46, 0.15);
+  color: var(--white);
+  transform: translateX(-4px);
+}
+
+.back-btn i {
+  font-size: 1.1rem;
+  color: var(--scarlet);
+  transition: transform 0.3s var(--ease);
+}
+
+.back-btn:hover i {
+  transform: translateX(-3px);
+}
+
+
+.project-hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8rem 2rem 4rem;
+  overflow: hidden;
+  border-bottom: 1px solid var(--gray-800);
+}
+
+.project-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--scarlet);
+  z-index: 10;
+}
+
+.project-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+
+.project-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  background-color: var(--gray-800);
+}
+
+.project-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 11, 0.6) 0%,
+    rgba(10, 10, 11, 0.85) 50%,
+    var(--black) 100%
+  );
+}
+
+.project-hero-content {
+  position: relative;
+  z-index: 5;
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeInDown 1s var(--ease);
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.project-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.project-hero-sub {
+  font-size: 1.15rem;
+  font-weight: 300;
+  color: var(--gray-200);
+  max-width: 600px;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.project-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  font-family: var(--font-condensed);
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+}
+
+.project-hero-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.project-hero-meta i {
+  color: var(--scarlet);
+  font-size: 1.1rem;
+}
+
+.project-hero-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+.project-body-wrap {
+  /* Narrower max-width for optimal reading length */
+  max-width: 840px; 
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.proj-section {
+  margin-bottom: 4.5rem;
+}
+
+.proj-section:last-child {
+  margin-bottom: 0;
+}
+
+.proj-section-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Scarlet accent line next to section titles */
+.proj-section-title::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--scarlet);
+}
+
+.proj-section p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--gray-200);
+  margin-bottom: 1.5rem;
+}
+
+/* Custom Bullet List */
+.proj-list {
+  list-style: none;
+  padding-left: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.proj-list li {
+  position: relative;
+  font-size: 1.05rem;
+  color: var(--gray-200);
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+  padding-left: 1.8rem;
+}
+
+.proj-list li::before {
+  content: '\25B8'; /* Small right-pointing triangle */
+  position: absolute;
+  left: 0;
+  top: 1px;
+  color: var(--scarlet);
+  font-size: 1.2rem;
+}
+
+.proj-screenshot-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.proj-screenshot {
+  background: var(--gray-900);
+  border: 1px solid var(--gray-700);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  transition: border-color 0.3s;
+}
+
+.proj-screenshot:hover {
+  border-color: var(--gray-600);
+}
+
+.proj-screenshot img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-bottom: 1px solid var(--gray-700);
+}
+
+.proj-screenshot figcaption {
+  padding: 1.2rem 1.5rem;
+  font-size: 0.9rem;
+  color: var(--gray-400);
+  font-family: var(--font-body);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.proj-screenshot img, 
+.proj-screenshot video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-bottom: 1px solid var(--gray-700);
+}
+
+.proj-media-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem; /* Adds breathing room between the stacked items */
+  margin-top: 2rem;
+}
+
+/* This restricts the width ONLY for images/videos inside the stack */
+.proj-media-stack .proj-screenshot {
+  width: 70%;
+  max-width: 400px; 
+  margin: 0 auto;
+}
+
+
+@media (min-width: 768px) {
+  /* Allow screenshots to sit side-by-side on larger screens */
+  .proj-screenshot-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .back-btn {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .project-hero {
+    padding-top: 7rem;
+    min-height: 60vh;
+  }
+  
+  .proj-section-title {
+    font-size: 1.8rem;
+  }
+
+  .proj-section-title::before {
+    width: 25px;
+  }
+  
+  .project-hero-meta {
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: center;
+  }
+
+  .proj-section p {
+    font-size: 1rem;
+  }
+}

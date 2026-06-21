@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wyatt Bordeaux | Microcontroller-Based RFID Access Control System</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="project.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js"></script>
+</head>
+<body>
+  <header class="project-hero">
+    <div class="project-hero-bg">
+      <img src="images/project_1.jpg" alt="Project hero image" class="project-hero-img" />
+      <div class="project-hero-overlay"></div>
+    </div>
+    <div class="project-hero-content">
+      <div class="project-tags" style="margin-bottom:1rem;">
+        <span class="ptag">C/C++</span>
+        <span class="ptag">Rapid Prototyping</span>
+        <span class="ptag">Project Management</span>
+      </div>
+      <h1 class="project-hero-title">Microcontroller-Based RFID Access Control System</h1>
+      <p class="project-hero-sub">A contactless, Arduino-driven RFID security system designed to replace traditional cylinder locks.</p>
+
+      <div class="project-hero-meta">
+        <span><i class="ph ph-calendar-blank"></i> July 2025</span>
+        <span><i class="ph ph-check-circle"></i> Completed</span>
+      </div>
+
+      <div class="project-hero-links">
+        <a href="https://github.com/ButterCaptain/RFID-Access-Control-System" target="_blank" class="contact-chip">
+          <i class="ph ph-github-logo"></i> GitHub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="project-body-wrap">
+
+    <!-- ── Overview ──────────────────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">Overview</h2>
+      <p>
+        Funded by Wrebotics during my internship, this project is a DIY contactless security system kit designed to teach young engineers the fundamentals of embedded systems. By building an Arduino-driven RFID lock, students learn hardware integration, C++ programming, and electromechanical control in a hands-on, accessible way.
+      </p>
+    </section>
+
+    <!-- ── Problem & Motivation ───────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">Problem &amp; Motivation</h2>
+      <p>
+        I noticed that traditional STEM kits often lack practical, real-world applications that truly keep students engaged and excited to learn. My motivation was to bridge this gap by designing a kit where kids build a tangible, useful product—a smart lock—while safely mastering complex hardware concepts. Ultimately, I wanted to empower the next generation of creators to explore engineering with confidence and curiosity.
+      </p>
+    </section>
+
+    <!-- ── Screenshots ───────────────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">Screenshots</h2>
+      <div class="proj-screenshot-grid">
+
+        <figure class="proj-screenshot">
+          <img src="images/project_1.jpg" alt="Screenshot 1" />
+          <figcaption>Final Build</figcaption>
+        </figure>
+
+        <figure class="proj-screenshot">
+          <img src="images/project_1-2.jpg" alt="Screenshot 2" />
+          <figcaption>Wiring before placed in enclosure</figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- ── Technical Details ─────────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">Technical Details</h2>
+      <p>
+        The system architecture centers around an Arduino Uno, programmed in C++ to manage both hardware interfacing and the access control logic. To optimize pin usage and introduce students to different communication standards, I utilized the SPI protocol for the MFRC522 RFID reader alongside the I2C bus for the 16x2 LCD display.
+      </p>
+
+      <ul class="proj-list">
+        <li>Multi-Protocol Integration: Leveraged both SPI and I2C buses simultaneously to maximize the microcontroller's efficiency without hardware conflicts.</li>
+        <li>Dynamic Firmware Logic: Developed C++ routines to handle UID authentication, including a startup sequence that sets the first scanned tag as a configurable "Master Key."</li>
+        <li>Electromechanical Actuation: Calibrated specific PWM signals to drive a servo motor, simulating a precise 90-degree physical latching mechanism.</li>
+      </ul>
+    </section>
+
+    <!-- ── What I Learned ────────────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">What I Learned</h2>
+      <p>
+        This project deepened my technical proficiency in embedded C++ and low-level hardware communication, but more importantly, it taught me how to translate complex engineering systems into accessible, student-friendly milestones. Designing for education forced me to prioritize clean, modular code and robust hardware integration so that younger users wouldn't be overwhelmed.
+      </p>
+    </section>
+
+    <!-- ── Next Steps (optional) ─────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">Next Steps</h2>
+      <p>
+        I plan to improve the kit by introducing EEPROM storage to retain key data after power loss and implementing interrupt-based sleep modes to extend battery life.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- Footer (same as index) -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <p class="footer-name">Wyatt Bordeaux</p>
+      <p class="footer-copy">&copy; <span id="year"></span> · Built with purpose in Las Vegas, NV</p>
+      <div class="footer-links">
+        <a href="mailto:Wyatt.l.bordeaux@gmail.com"><i class="ph ph-envelope-simple"></i></a>
+        <a href="https:www.linkedin.com/in/wyatt-bordeaux" target="_blank"><i class="ph ph-linkedin-logo"></i></a>
+        <a href="Files/Resume_2026.pdf" target="_blank"><i class="ph ph-file-text"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
