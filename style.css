@@ -11,7 +11,7 @@
   --gray-800:       #1A1A1F;
   --gray-700:       #242429;
   --gray-600:       #36363D;
-  --gray-400:       #7A7A85;
+  --gray-400:       #84848E;
   --gray-200:       #C4C4CC;
   --white:          #F5F4F0;
 
@@ -502,6 +502,98 @@ a {
   flex: 1;
 }
 
+
+#orgs {
+  background: var(--black);
+}
+
+.orgs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 2rem;
+}
+
+.org-card {
+  background: var(--gray-900);
+  border: 1px solid var(--gray-700);
+  border-radius: var(--card-radius);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.org-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.org-logo {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  background: var(--gray-800);
+  border: 1px solid var(--gray-700);
+  border-radius: 6px;
+  padding: 6px;
+}
+
+.org-heading {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.org-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.org-gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--card-radius);
+  border: 1px solid var(--gray-700);
+}
+
+.org-desc {
+  font-size: 0.98rem;
+  color: var(--gray-200);
+  line-height: 1.7;
+}
+
+.editable-placeholder {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--gray-200);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed var(--gray-600);
+  border-radius: var(--card-radius);
+  padding: 1rem 1.25rem;
+}
+
+.editable-placeholder i {
+  color: var(--scarlet);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+
+#hobbies {
+  background: var(--gray-900);
+}
+
+#hobbies::before { display: none; }  /* no left bar on hobbies — different bg */
+
+
 #footer {
   background: var(--gray-900);
   border-top: 1px solid var(--gray-700);
@@ -615,6 +707,10 @@ a {
   }
 
   .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .orgs-grid {
     grid-template-columns: 1fr;
   }
 

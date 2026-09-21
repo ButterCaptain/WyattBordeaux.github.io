@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wyatt Bordeaux | UNR Parking Locator</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="project.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js"></script>
+</head>
+<body>
+  <header class="project-hero">
+    <div class="project-hero-bg">
+      <img src="Images/Uni_Media/Parking_Locater_UNR/Ground_station.jpg" alt="Project hero image" class="project-hero-img" />
+      <div class="project-hero-overlay"></div>
+    </div>
+    <div class="project-hero-content">
+      <div class="project-tags" style="margin-bottom:1rem;">
+        <span class="editable-placeholder" style="display:inline-flex; padding:0.3rem 0.7rem; font-size:0.8rem;"><i class="ph ph-pencil-simple"></i> I2C</span>
+        <span class="editable-placeholder" style="display:inline-flex; padding:0.3rem 0.7rem; font-size:0.8rem;"><i class="ph ph-pencil-simple"></i> IoT</span>
+      </div>
+      <h1 class="project-hero-title">UNR Parking Locator</h1>
+      <p class="project-hero-sub">A class project built to help drivers find open parking spots on campus.</p>
+
+      <div class="project-hero-meta">
+        <span><i class="ph ph-calendar-blank"></i> Class Project</span>
+        <span><i class="ph ph-graduation-cap"></i> UNR</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="project-body-wrap">
+
+    <!-- ── Overview ──────────────────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">Overview</h2>
+      <p>
+        Designed as a one-week "Smart Cities" prototype, this system upgrades UNR’s current parking infrastructure by pushing real-time space availability to a web interface, saving drivers from manually scanning for LED indicators. The project leverages an ESP-NOW wireless network between ESP32 microcontrollers to connect ground stations to a central node without running physical wires. Because the ESP32 only features two I2C controllers, driving four distinct OLED displays required a creative software workaround: dynamically reallocating the I2C pins during runtime to hot-swap communications between the screens, resulting in a seamless, glitch-free visual update.
+      </p>
+    </section>
+
+    <!-- ── Screenshots ───────────────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title">Screenshots</h2>
+      <div class="proj-screenshot-grid">
+
+        <figure class="proj-screenshot">
+          <img src="Images/Uni_Media/Parking_Locater_UNR/Final_Product.jpg" alt="Final product" />
+          <figcaption>Final Product</figcaption>
+        </figure>
+
+        <figure class="proj-screenshot">
+          <img src="Images/Uni_Media/Parking_Locater_UNR/3D_Print.jpg" alt="3D-printed enclosure" />
+          <figcaption>3D-Printed Enclosure</figcaption>
+        </figure>
+
+        <figure class="proj-screenshot">
+          <img src="Images/Uni_Media/Parking_Locater_UNR/Prototyping_.jpg" alt="Prototyping stage" />
+          <figcaption>Prototyping</figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer (same as index) -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <p class="footer-name">Wyatt Bordeaux</p>
+      <p class="footer-copy">&copy; <span id="year"></span> · Built with purpose in Las Vegas, NV</p>
+      <div class="footer-links">
+        <a href="mailto:Wyatt.l.bordeaux@gmail.com"><i class="ph ph-envelope-simple"></i></a>
+        <a href="https://www.linkedin.com/in/wyatt-bordeaux" target="_blank"><i class="ph ph-linkedin-logo"></i></a>
+        <a href="Files/Resume_2026.pdf" target="_blank"><i class="ph ph-file-text"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

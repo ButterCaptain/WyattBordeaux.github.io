@@ -131,6 +131,7 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--gray-400);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
 }
 
 .project-hero-meta span {
