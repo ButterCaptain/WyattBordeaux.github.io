@@ -253,13 +253,7 @@
 
 .proj-screenshot-grid--large {
   grid-template-columns: 1fr;
-  gap: 3rem;
-}
-
-.proj-screenshot-grid--large .proj-screenshot img {
-  max-height: 600px;
-  width: auto;
-  object-fit: contain;
+  gap: 2.5rem;
 }
 
 .proj-screenshot {
@@ -268,16 +262,40 @@
   border-radius: var(--card-radius);
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  transition: border-color 0.3s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1.5rem;
+  transition: all 0.3s var(--ease);
+  cursor: pointer;
+}
+
+.proj-screenshot:hover {
+  border-color: var(--scarlet);
+  box-shadow: 0 15px 40px rgba(200, 16, 46, 0.25);
+  transform: translateY(-4px);
 }
 
 .proj-screenshot-grid--large .proj-screenshot {
-  padding: 2rem;
-  background: var(--gray-800);
+  display: flex;
+  flex-direction: column;
+}
+
+.proj-screenshot-grid--large .proj-screenshot img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+  border-bottom: 1px solid var(--gray-700);
+}
+
+.proj-screenshot figcaption {
+  padding: 1.5rem;
+  font-size: 1rem;
+  color: var(--gray-300);
+  font-family: var(--font-body);
+  text-align: center;
+  line-height: 1.5;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .proj-screenshot:hover {
@@ -331,6 +349,68 @@
   }
 }
 
+/* ── Image Lightbox Modal ── */
+.lightbox-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  backdrop-filter: blur(4px);
+}
+
+.lightbox-modal.active {
+  display: flex;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  background: var(--gray-900);
+  border: 1px solid var(--gray-700);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+.lightbox-content img {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: 100%;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 40px;
+  height: 40px;
+  background: rgba(10, 10, 11, 0.8);
+  border: 1px solid var(--gray-600);
+  border-radius: 50%;
+  color: var(--white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.lightbox-close:hover {
+  background: var(--scarlet);
+  border-color: var(--scarlet);
+}
+
 @media (max-width: 768px) {
   .back-btn {
     top: 1rem;
@@ -360,6 +440,11 @@
 
   .proj-section p {
     font-size: 1rem;
+  }
+
+  .lightbox-content {
+    max-width: 95vw;
+    max-height: 80vh;
   }
 }
 

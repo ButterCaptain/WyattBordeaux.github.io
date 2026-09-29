@@ -154,6 +154,14 @@
 
   </main>
 
+  <!-- Lightbox Modal for Images -->
+  <div class="lightbox-modal" id="lightboxModal">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose">×</button>
+      <img id="lightboxImage" src="" alt="Expanded image" />
+    </div>
+  </div>
+
   <!-- Footer (same as index) -->
   <footer id="footer">
     <div class="footer-inner">
@@ -168,5 +176,43 @@
   </footer>
 
   <script src="main.js"></script>
+  <script>
+  // Image lightbox functionality
+  const lightbox = document.getElementById('lightboxModal');
+  const lightboxImage = document.getElementById('lightboxImage');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const screenshots = document.querySelectorAll('.proj-screenshot-grid--large .proj-screenshot');
+
+  screenshots.forEach(screenshot => {
+    const img = screenshot.querySelector('img');
+    if (img) {
+      screenshot.addEventListener('click', () => {
+        lightboxImage.src = img.src;
+        lightboxImage.alt = img.alt;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+  });
+
+  lightboxClose.addEventListener('click', () => {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  });
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+  });
+  </script>
 </body>
 </html>
