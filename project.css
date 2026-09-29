@@ -145,6 +145,30 @@
   font-size: 1.1rem;
 }
 
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: rgba(200, 16, 46, 0.1);
+  border: 1px solid var(--scarlet);
+  border-radius: 4px;
+  color: var(--scarlet);
+  text-decoration: none;
+  font-family: var(--font-condensed);
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.3s var(--ease);
+}
+
+.hero-link:hover {
+  background: rgba(200, 16, 46, 0.2);
+  border-color: var(--white);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
 .project-hero-links {
   display: flex;
   gap: 1rem;
@@ -294,12 +318,12 @@
     padding: 0.5rem 0.8rem;
     font-size: 0.8rem;
   }
-  
+
   .project-hero {
     padding-top: 7rem;
     min-height: 60vh;
   }
-  
+
   .proj-section-title {
     font-size: 1.8rem;
   }
@@ -307,7 +331,7 @@
   .proj-section-title::before {
     width: 25px;
   }
-  
+
   .project-hero-meta {
     flex-direction: column;
     gap: 0.8rem;
@@ -317,4 +341,238 @@
   .proj-section p {
     font-size: 1rem;
   }
+}
+
+/* ── Spec Strip (hero substrip — quick-scan stats) ── */
+.spec-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  padding: 1.75rem 0;
+  margin-bottom: 3.5rem;
+  border-top: 1px solid var(--gray-700);
+  border-bottom: 1px solid var(--gray-700);
+}
+
+.spec-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.spec-item .spec-value {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: -0.01em;
+}
+
+.spec-item .spec-label {
+  font-family: var(--font-condensed);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+}
+
+/* ── Section numbering ── */
+.section-index {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--gray-600);
+  margin-right: 0.6rem;
+}
+
+/* ── Spec Sheet (label/value datasheet rows) ── */
+.spec-sheet {
+  border-top: 1px solid var(--gray-700);
+  margin-bottom: 1.5rem;
+}
+
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 2rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--gray-700);
+}
+
+.spec-row-label {
+  font-family: var(--font-condensed);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  white-space: nowrap;
+}
+
+.spec-row-value {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--white);
+  text-align: right;
+}
+
+/* ── Tabbed Media Viewer (pill segmented control + shared panel) ── */
+.tab-nav-wrap { text-align: center; }
+
+.tab-nav {
+  position: relative;
+  display: inline-flex;
+  gap: 0.15rem;
+  padding: 0.3rem;
+  margin: 0 auto 1.5rem;
+  background: var(--gray-800);
+  border: 1px solid var(--gray-700);
+  border-radius: 999px;
+}
+
+.tab-indicator {
+  position: absolute;
+  top: 0.3rem;
+  bottom: 0.3rem;
+  left: 0.3rem;
+  width: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--scarlet), var(--scarlet-dark));
+  box-shadow: 0 6px 18px rgba(200,16,46,0.35);
+  transition: left 0.35s var(--ease), width 0.35s var(--ease);
+  z-index: 0;
+}
+
+.tab-btn {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.4rem;
+  background: transparent;
+  border: none;
+  border-radius: 999px;
+  color: var(--gray-400);
+  font-family: var(--font-condensed);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.25s;
+}
+
+.tab-btn i { font-size: 1.1rem; }
+.tab-btn:hover { color: var(--white); }
+.tab-btn.active { color: var(--white); }
+.tab-btn.active i { color: var(--white); }
+.tab-btn:not(.active) i { color: var(--scarlet); }
+
+.media-panel {
+  border: 1px solid var(--gray-700);
+  border-radius: var(--card-radius);
+  background: var(--gray-900);
+  overflow: hidden;
+}
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.pan-viewer {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(200,16,46,0.05), transparent 60%),
+    var(--gray-800);
+  cursor: grab;
+  touch-action: none;
+}
+
+.pan-viewer.dragging { cursor: grabbing; }
+
+.pan-canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: 0 0;
+  will-change: transform;
+  user-select: none;
+}
+
+/* The global `img { max-width:100% }` rule (style.css) must be overridden here,
+   or the pan/zoom transform math will be off against the clamped rendered size. */
+.pan-canvas img {
+  display: block;
+  max-width: none;
+  width: 900px;
+  height: auto;
+  pointer-events: none;
+}
+
+.viewer-hud {
+  position: absolute;
+  top: 0.9rem;
+  left: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--gray-200);
+  background: rgba(10,10,11,0.55);
+  border: 1px solid var(--gray-700);
+  border-radius: 2px;
+  padding: 0.3rem 0.6rem;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.pan-hint {
+  position: absolute;
+  bottom: 0.9rem;
+  left: 1rem;
+  font-size: 0.72rem;
+  color: var(--gray-400);
+  font-family: var(--font-condensed);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.pan-controls {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.4rem;
+  z-index: 2;
+}
+
+.pan-controls button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--gray-600);
+  background: rgba(10,10,11,0.6);
+  color: var(--white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.pan-controls button:hover { border-color: var(--scarlet); background: rgba(200,16,46,0.2); }
+
+.proj-media-download {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .pan-viewer { height: 340px; }
+  .tab-btn { font-size: 0.78rem; padding: 0.55rem 1.1rem; }
+  .spec-strip { gap: 1.5rem; }
+  .spec-item .spec-value { font-size: 1.15rem; }
 }

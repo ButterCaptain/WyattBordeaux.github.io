@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wyatt Bordeaux | Multi-Rail Power Distribution Board</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="project.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js"></script>
+</head>
+<body>
+
+  <header class="project-hero">
+    <div class="project-hero-bg">
+      <img src="Images/Uni_Media/Power_Board/PHysical_Image.png" alt="Multi-Rail Power Distribution Board" class="project-hero-img" />
+      <div class="project-hero-overlay"></div>
+    </div>
+    <div class="project-hero-content">
+      <div class="project-tags" style="margin-bottom:1rem;">
+        <span class="ptag">PCB Design</span>
+        <span class="ptag">KiCad</span>
+        <span class="ptag">Power Electronics</span>
+      </div>
+
+      <h1 class="project-hero-title">Multi-Rail Power Distribution Board</h1>
+      <p class="project-hero-sub">A custom bench power supply built to streamline hardware prototyping at Sable Systems.</p>
+
+      <div class="project-hero-meta">
+        <!-- 🖊️ PLACEHOLDER: exact build date, if you want more precision than the year -->
+        <span><i class="ph ph-calendar-blank"></i> 2026</span>
+        <span><i class="ph ph-check-circle"></i> In Use</span>
+        <a href="https://github.com/ButterCaptain/Multi-Rail-Power-Distribution-Board" target="_blank" class="hero-link">
+          <i class="ph ph-github-logo"></i> Repository
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="project-body-wrap">
+
+    <!-- ── Spec Strip ────────────────────────────────────────── -->
+    <div class="spec-strip reveal">
+      <div class="spec-item">
+        <span class="spec-value">24V</span>
+        <span class="spec-label">Input</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-value">12·5·3.3V</span>
+        <span class="spec-label">Output Rails</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-value">3A</span>
+        <span class="spec-label">Per Rail</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-value">KiCad</span>
+        <span class="spec-label">Design Tool</span>
+      </div>
+    </div>
+
+    <!-- ── Overview ──────────────────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title"><span class="section-index">01</span>Overview</h2>
+      <p>
+        Working at the R&amp;D bench at Sable Systems, I frequently test and prototype new hardware architectures. I quickly grew tired of cluttering my workspace with three or four separate benchtop power supplies just to run a quick evaluation. To streamline my workflow, I designed and built this custom Multi-Rail Power Distribution Board (PDB) in KiCad — cascading a single 24V input into 12V, 5V, and 3.3V rails from one compact board.
+      </p>
+    </section>
+
+    <!-- ── Problem & Motivation ───────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title"><span class="section-index">02</span>Problem &amp; Motivation</h2>
+      <p>
+        Every quick bench evaluation meant dragging out three or four separate supplies, cluttering the workspace and slowing down iteration. I wanted one compact, high-current board that could sit permanently on my desk and confidently power anything I was prototyping — from sensors to motors — without swapping supplies or worrying about voltage drop or thermal limits. I intentionally over-engineered the current capacity so it could drive demanding loads like cooling fans, pneumatic valves, or larger motors without hesitation.
+      </p>
+    </section>
+
+    <!-- ── Interactive Media ─────────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title"><span class="section-index">03</span>Interactive Media</h2>
+      <p>Explore the assembled board render, or pan/zoom the full KiCad layout export.</p>
+
+      <div class="tab-nav-wrap">
+        <div class="tab-nav" role="tablist">
+          <span class="tab-indicator" aria-hidden="true"></span>
+          <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-panel-render" id="tab-btn-render" data-tab="render">
+            <i class="ph ph-image"></i> Board Render
+          </button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-panel-layout" id="tab-btn-layout" data-tab="layout">
+            <i class="ph ph-arrows-out-cardinal"></i> Interactive Layout
+          </button>
+        </div>
+      </div>
+
+      <div class="media-panel">
+        <div class="tab-panel active" id="tab-panel-render" role="tabpanel" aria-labelledby="tab-btn-render">
+          <div class="pan-viewer" data-label="BOARD RENDER">
+            <div class="pan-canvas">
+              <img src="Images/Uni_Media/Power_Board/PHysical_Image.png" alt="Assembled Multi-Rail Power Distribution Board" draggable="false" />
+            </div>
+            <div class="viewer-hud">BOARD RENDER · 1.00×</div>
+            <div class="pan-controls">
+              <button type="button" data-zoom-in aria-label="Zoom in"><i class="ph ph-plus"></i></button>
+              <button type="button" data-zoom-out aria-label="Zoom out"><i class="ph ph-minus"></i></button>
+              <button type="button" data-zoom-reset aria-label="Reset view"><i class="ph ph-arrows-in"></i></button>
+            </div>
+            <p class="pan-hint">Click-drag to pan · scroll to zoom</p>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-panel-layout" role="tabpanel" aria-labelledby="tab-btn-layout">
+          <div class="pan-viewer" data-label="BOARD LAYOUT">
+            <div class="pan-canvas">
+              <img src="Images/Uni_Media/Power_Board/Power_Board_6.svg" alt="Full board layout render (front + back copper)" draggable="false" />
+            </div>
+            <div class="viewer-hud">BOARD LAYOUT · 1.00×</div>
+            <div class="pan-controls">
+              <button type="button" data-zoom-in aria-label="Zoom in"><i class="ph ph-plus"></i></button>
+              <button type="button" data-zoom-out aria-label="Zoom out"><i class="ph ph-minus"></i></button>
+              <button type="button" data-zoom-reset aria-label="Reset view"><i class="ph ph-arrows-in"></i></button>
+            </div>
+            <p class="pan-hint">Click-drag to pan · scroll to zoom</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Technical Details ─────────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title"><span class="section-index">04</span>Technical Details</h2>
+
+      <div class="spec-sheet">
+        <div class="spec-row">
+          <span class="spec-row-label">Input Voltage</span>
+          <span class="spec-row-value">24V (barrel jack)</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-row-label">Output Rails</span>
+          <span class="spec-row-value">12V · 5V · 3.3V</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-row-label">Max Current</span>
+          <span class="spec-row-value">3A per rail</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-row-label">Connectors</span>
+          <span class="spec-row-value">Keyed headers · barrel jack · USB-A</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-row-label">Protection</span>
+          <span class="spec-row-value">TI TPS25948 eFuses, custom UVLO</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-row-label">Board Revision</span>
+          <span class="spec-row-value">Rev 6 (KiCad)</span>
+        </div>
+      </div>
+
+      <ul class="proj-list">
+        <li>Cascades a single 24V input down to 12V, 5V, and 3.3V rails using high-efficiency switching buck regulators.</li>
+        <li>Over-engineered for headroom: large copper polygon pours support up to <strong>3A per rail</strong> for demanding loads like cooling fans, pneumatic valves, and motors.</li>
+        <li>TI <strong>TPS25948 eFuses</strong> with custom UVLO thresholds and active-low fault indicator LEDs catch overcurrent events immediately during bench testing.</li>
+        <li>Keyed connectors, a 24V barrel jack input, and a USB-A output (for a simple 5V charger or powering an MCU) keep the bench wiring simple and foolproof.</li>
+      </ul>
+    </section>
+
+    <!-- ── What I Learned ────────────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title"><span class="section-index">05</span>What I Learned</h2>
+      <p>
+        This was a highly rewarding project, and I couldn't have successfully routed and finalized the design without the invaluable mentoring from Ronald and Scott. Working through their feedback taught me as much about production-quality routing and layout discipline as any class could have.
+      </p>
+    </section>
+
+    <!-- ── Next Steps ─────────────────────────────────────────── -->
+    <section class="proj-section reveal">
+      <h2 class="proj-section-title"><span class="section-index">06</span>Next Steps</h2>
+      <p>
+        Having a dedicated, high-current PDB on my desk has already drastically reduced my setup times, and I have several more custom PCBs in the pipeline to further accelerate my hardware development cycle.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- Footer (same as index) -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <p class="footer-name">Wyatt Bordeaux</p>
+      <p class="footer-copy">&copy; <span id="year"></span> · Built with purpose in Las Vegas, NV</p>
+      <div class="footer-links">
+        <a href="mailto:Wyatt.l.bordeaux@gmail.com"><i class="ph ph-envelope-simple"></i></a>
+        <a href="https://www.linkedin.com/in/wyatt-bordeaux" target="_blank"><i class="ph ph-linkedin-logo"></i></a>
+        <a href="Files/Resume_2026.pdf" target="_blank"><i class="ph ph-file-text"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script>
+  // ── Tab switching + sliding pill indicator ──────────────────────────────
+  const nav = document.querySelector('.tab-nav');
+  const tabBtns = nav ? Array.from(nav.querySelectorAll('.tab-btn')) : [];
+  const tabPanels = document.querySelectorAll('.tab-panel');
+  const indicator = nav ? nav.querySelector('.tab-indicator') : null;
+
+  function moveIndicator(btn) {
+    if (!indicator || !btn) return;
+    indicator.style.left = btn.offsetLeft + 'px';
+    indicator.style.width = btn.offsetWidth + 'px';
+  }
+
+  function activateTab(btn) {
+    tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+    tabPanels.forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+    document.getElementById(btn.getAttribute('aria-controls')).classList.add('active');
+    moveIndicator(btn);
+  }
+
+  tabBtns.forEach(btn => btn.addEventListener('click', () => activateTab(btn)));
+  window.addEventListener('resize', () => moveIndicator(tabBtns.find(b => b.classList.contains('active'))));
+  moveIndicator(tabBtns.find(b => b.classList.contains('active')) || tabBtns[0]);
+
+  // ── Generic 2D pan/zoom viewer (Board Render + Interactive Layout tabs) ─
+  document.querySelectorAll('.pan-viewer').forEach(viewer => {
+    const canvas = viewer.querySelector('.pan-canvas');
+    const hud = viewer.querySelector('.viewer-hud');
+    const label = viewer.dataset.label || '';
+    if (!canvas) return;
+
+    let scale = 1, posX = 0, posY = 0;
+    const MIN_SCALE = 0.3, MAX_SCALE = 6;
+    let isDragging = false, lastX = 0, lastY = 0;
+
+    function applyTransform() {
+      canvas.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
+      if (hud) hud.textContent = `${label} · ${scale.toFixed(2)}×`;
+    }
+    function clampScale(s) { return Math.min(MAX_SCALE, Math.max(MIN_SCALE, s)); }
+
+    viewer.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const rect = viewer.getBoundingClientRect();
+      const cx = e.clientX - rect.left - rect.width / 2;
+      const cy = e.clientY - rect.top - rect.height / 2;
+      const newScale = clampScale(scale * (1 - e.deltaY * 0.0015));
+      const ratio = newScale / scale;
+      posX = cx - (cx - posX) * ratio;
+      posY = cy - (cy - posY) * ratio;
+      scale = newScale;
+      applyTransform();
+    }, { passive: false });
+
+    viewer.addEventListener('pointerdown', (e) => {
+      isDragging = true; lastX = e.clientX; lastY = e.clientY;
+      viewer.classList.add('dragging');
+      viewer.setPointerCapture(e.pointerId);
+    });
+    viewer.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      posX += e.clientX - lastX; posY += e.clientY - lastY;
+      lastX = e.clientX; lastY = e.clientY;
+      applyTransform();
+    });
+    ['pointerup', 'pointerleave', 'pointercancel'].forEach(evt =>
+      viewer.addEventListener(evt, () => { isDragging = false; viewer.classList.remove('dragging'); })
+    );
+
+    const zoomIn = viewer.querySelector('[data-zoom-in]');
+    const zoomOut = viewer.querySelector('[data-zoom-out]');
+    const zoomReset = viewer.querySelector('[data-zoom-reset]');
+    if (zoomIn) zoomIn.addEventListener('click', () => { scale = clampScale(scale * 1.25); applyTransform(); });
+    if (zoomOut) zoomOut.addEventListener('click', () => { scale = clampScale(scale * 0.8); applyTransform(); });
+    if (zoomReset) zoomReset.addEventListener('click', () => { scale = 1; posX = 0; posY = 0; applyTransform(); });
+
+    applyTransform();
+  });
+  </script>
+</body>
+</html>

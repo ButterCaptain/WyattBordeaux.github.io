@@ -19,6 +19,7 @@
   --font-display:  'Cormorant Garamond', Georgia, serif;
   --font-body:     'Barlow', sans-serif;
   --font-condensed:'Barlow Condensed', sans-serif;
+  --font-mono:     'SF Mono', 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
 
   /* Spacing */
   --section-pad:   7rem 2rem;
@@ -502,6 +503,135 @@ a {
   flex: 1;
 }
 
+/* ── Featured Project Card ── */
+.project-card--featured {
+  grid-column: 1 / -1;   /* full-width row — robust regardless of the auto-fill column count at any breakpoint */
+  flex-direction: row;
+  align-items: stretch;
+  position: relative;
+  background: linear-gradient(155deg, var(--gray-800) 0%, var(--gray-900) 55%, var(--black) 100%);
+  border-color: var(--gray-600);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+}
+
+/* Faint engineering-grid backdrop, like a datasheet drawing sheet */
+.project-card--featured::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(245,244,240,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,244,240,0.035) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(155deg, rgba(0,0,0,0.9), transparent 70%);
+  z-index: 0;
+}
+
+.project-card--featured:hover {
+  transform: translateY(-6px);
+  border-color: var(--scarlet);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.6), 0 0 0 1px var(--scarlet-glow), 0 0 60px rgba(200,16,46,0.12);
+}
+
+.project-card--featured .project-img-wrap {
+  flex: 1 1 55%;
+  aspect-ratio: auto;
+  min-height: 340px;
+  z-index: 1;
+}
+
+.project-card--featured .project-img {
+  object-fit: cover;
+  filter: saturate(1.08) contrast(1.03);
+}
+
+/* Vignette so the render blends into the card rather than sitting as a flat rectangle */
+.project-card--featured .project-img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(10,10,11,0.05) 0%, transparent 20%, transparent 80%, rgba(10,10,11,0.35) 100%);
+  pointer-events: none;
+}
+
+.project-card--featured .project-body {
+  flex: 1 1 45%;
+  justify-content: center;
+  padding: 2.75rem;
+  gap: 1.1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.project-card--featured .project-title {
+  font-size: 2.1rem;
+  letter-spacing: -0.01em;
+}
+.project-card--featured .project-desc { font-size: 1rem; }
+.project-card--featured .ptag { font-size: 0.85rem; }
+
+.featured-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-condensed);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--scarlet);
+}
+
+.featured-eyebrow::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--scarlet);
+  box-shadow: 0 0 10px 2px var(--scarlet-glow);
+  animation: pulseDot 2.4s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.5; transform: scale(0.75); }
+}
+
+/* Rail-voltage spec chips — datasheet-style micro stats */
+.featured-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.1rem;
+  margin: 0.2rem 0 0.4rem;
+  font-family: var(--font-mono);
+}
+
+.featured-specs .spec {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--gray-200);
+}
+
+.featured-specs .spec strong {
+  color: var(--white);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.featured-specs .spec + .spec {
+  padding-left: 1.1rem;
+  border-left: 1px solid var(--gray-600);
+}
+
+@media (max-width: 900px) {
+  .project-card--featured { flex-direction: column; }
+  .project-card--featured .project-img-wrap { min-height: 0; aspect-ratio: 16 / 9; }
+  .project-card--featured .project-title { font-size: 1.6rem; }
+  .project-card--featured .project-body { padding: 2rem; }
+}
+
 
 #orgs {
   background: var(--black);
@@ -509,7 +639,7 @@ a {
 
 .orgs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
   gap: 2rem;
 }
 
@@ -519,25 +649,57 @@ a {
   border-radius: var(--card-radius);
   padding: 1.75rem;
   display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+  align-items: flex-start;
+  gap: 1.75rem;
 }
 
-.org-card-header {
+/* Image sidebar — one lead photo + a small supporting-thumbnail row,
+   rather than a full-width strip that broke up the reading flow. */
+.org-visual {
+  flex: 0 0 190px;
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
-.org-logo {
-  flex-shrink: 0;
-  width: 56px;
-  height: 56px;
+.org-cover {
+  position: relative;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+.org-gallery--cover {
+  aspect-ratio: 3 / 4;
+}
+
+.org-gallery.org-gallery--cover img {
+  aspect-ratio: auto;
+  width: 100%;
+  height: 100%;
+}
+
+.org-logo-badge {
+  position: absolute;
+  left: 0.5rem;
+  bottom: 0.5rem;
+  width: 38px;
+  height: 38px;
   object-fit: contain;
   background: var(--gray-800);
-  border: 1px solid var(--gray-700);
+  border: 1px solid var(--gray-600);
   border-radius: 6px;
-  padding: 6px;
+  padding: 5px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.45);
+}
+
+.org-gallery--thumbs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.org-gallery.org-gallery--thumbs img {
+  aspect-ratio: 1 / 1;
 }
 
 .org-heading {
@@ -545,12 +707,15 @@ a {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  margin-bottom: 0.5rem;
 }
 
-.org-gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
+.org-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 .org-gallery img {
@@ -559,12 +724,114 @@ a {
   object-fit: cover;
   border-radius: var(--card-radius);
   border: 1px solid var(--gray-700);
+  transition: transform 0.3s var(--ease), border-color 0.3s;
+}
+
+.org-gallery img:hover {
+  transform: scale(1.03);
+  border-color: var(--gray-600);
+}
+
+@media (max-width: 700px) {
+  .org-card { flex-direction: column; }
+  .org-visual { flex-direction: row; width: 100%; }
+  .org-cover { flex: 1 1 60%; }
+  .org-gallery--thumbs { flex: 1 1 40%; grid-template-columns: 1fr; }
 }
 
 .org-desc {
   font-size: 0.98rem;
   color: var(--gray-200);
   line-height: 1.7;
+}
+
+.org-role {
+  position: relative;
+  padding-left: 1.4rem;
+}
+
+.org-role::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.4rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--scarlet);
+  box-shadow: 0 0 0 3px rgba(200,16,46,0.16);
+}
+
+.org-role::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 1rem;
+  bottom: -1.6rem;
+  width: 1px;
+  background: linear-gradient(var(--gray-600), transparent);
+}
+
+.org-role:last-child::after { display: none; }
+
+.org-role + .org-role {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--gray-700);
+}
+
+.org-role-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.org-role-title {
+  font-family: var(--font-condensed);
+  font-size: 1.05rem;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.org-role-current {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--scarlet);
+  border: 1px solid rgba(200,16,46,0.4);
+  border-radius: 2px;
+  padding: 0.1rem 0.4rem;
+}
+
+.org-role-date {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--gray-400);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.org-role-list {
+  margin-top: 0.6rem;
+  padding-left: 1.2rem;
+  list-style: disc;
+}
+
+.org-role-list li {
+  color: var(--gray-200);
+  line-height: 1.55;
+  margin-bottom: 0.4rem;
+}
+
+.org-role-list li strong {
+  color: var(--white);
+  font-weight: 600;
 }
 
 .editable-placeholder {
