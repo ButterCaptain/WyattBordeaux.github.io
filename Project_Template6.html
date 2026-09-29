@@ -77,53 +77,19 @@
       </p>
     </section>
 
-    <!-- ── Interactive Media ─────────────────────────────────── -->
+    <!-- ── Board Media ──────────────────────────────────────── -->
     <section class="proj-section reveal">
-      <h2 class="proj-section-title"><span class="section-index">03</span>Interactive Media</h2>
-      <p>Explore the assembled board render, or pan/zoom the full KiCad layout export.</p>
+      <h2 class="proj-section-title"><span class="section-index">03</span>Board Media</h2>
 
-      <div class="tab-nav-wrap">
-        <div class="tab-nav" role="tablist">
-          <span class="tab-indicator" aria-hidden="true"></span>
-          <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-panel-render" id="tab-btn-render" data-tab="render">
-            <i class="ph ph-image"></i> Board Render
-          </button>
-          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-panel-layout" id="tab-btn-layout" data-tab="layout">
-            <i class="ph ph-arrows-out-cardinal"></i> Interactive Layout
-          </button>
-        </div>
-      </div>
-
-      <div class="media-panel">
-        <div class="tab-panel active" id="tab-panel-render" role="tabpanel" aria-labelledby="tab-btn-render">
-          <div class="pan-viewer" data-label="BOARD RENDER">
-            <div class="pan-canvas">
-              <img src="Images/Uni_Media/Power_Board/PHysical_Image.png" alt="Assembled Multi-Rail Power Distribution Board" draggable="false" />
-            </div>
-            <div class="viewer-hud">BOARD RENDER · 1.00×</div>
-            <div class="pan-controls">
-              <button type="button" data-zoom-in aria-label="Zoom in"><i class="ph ph-plus"></i></button>
-              <button type="button" data-zoom-out aria-label="Zoom out"><i class="ph ph-minus"></i></button>
-              <button type="button" data-zoom-reset aria-label="Reset view"><i class="ph ph-arrows-in"></i></button>
-            </div>
-            <p class="pan-hint">Click-drag to pan · scroll to zoom</p>
-          </div>
-        </div>
-
-        <div class="tab-panel" id="tab-panel-layout" role="tabpanel" aria-labelledby="tab-btn-layout">
-          <div class="pan-viewer" data-label="BOARD LAYOUT">
-            <div class="pan-canvas">
-              <img src="Images/Uni_Media/Power_Board/Power_Board_6.svg" alt="Full board layout render (front + back copper)" draggable="false" />
-            </div>
-            <div class="viewer-hud">BOARD LAYOUT · 1.00×</div>
-            <div class="pan-controls">
-              <button type="button" data-zoom-in aria-label="Zoom in"><i class="ph ph-plus"></i></button>
-              <button type="button" data-zoom-out aria-label="Zoom out"><i class="ph ph-minus"></i></button>
-              <button type="button" data-zoom-reset aria-label="Reset view"><i class="ph ph-arrows-in"></i></button>
-            </div>
-            <p class="pan-hint">Click-drag to pan · scroll to zoom</p>
-          </div>
-        </div>
+      <div class="proj-screenshot-grid">
+        <figure class="proj-screenshot">
+          <img src="Images/Uni_Media/Power_Board/Power_Board_Render.png" alt="Board 3D render showing component placement" />
+          <figcaption>3D Board Render</figcaption>
+        </figure>
+        <figure class="proj-screenshot">
+          <img src="Images/Uni_Media/Power_Board/Power_Board_6.svg" alt="Full board layout with front and back copper layers" />
+          <figcaption>Board Layout (KiCad Export)</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -198,86 +164,5 @@
   </footer>
 
   <script src="main.js"></script>
-  <script>
-  // ── Tab switching + sliding pill indicator ──────────────────────────────
-  const nav = document.querySelector('.tab-nav');
-  const tabBtns = nav ? Array.from(nav.querySelectorAll('.tab-btn')) : [];
-  const tabPanels = document.querySelectorAll('.tab-panel');
-  const indicator = nav ? nav.querySelector('.tab-indicator') : null;
-
-  function moveIndicator(btn) {
-    if (!indicator || !btn) return;
-    indicator.style.left = btn.offsetLeft + 'px';
-    indicator.style.width = btn.offsetWidth + 'px';
-  }
-
-  function activateTab(btn) {
-    tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
-    tabPanels.forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    btn.setAttribute('aria-selected', 'true');
-    document.getElementById(btn.getAttribute('aria-controls')).classList.add('active');
-    moveIndicator(btn);
-  }
-
-  tabBtns.forEach(btn => btn.addEventListener('click', () => activateTab(btn)));
-  window.addEventListener('resize', () => moveIndicator(tabBtns.find(b => b.classList.contains('active'))));
-  moveIndicator(tabBtns.find(b => b.classList.contains('active')) || tabBtns[0]);
-
-  // ── Generic 2D pan/zoom viewer (Board Render + Interactive Layout tabs) ─
-  document.querySelectorAll('.pan-viewer').forEach(viewer => {
-    const canvas = viewer.querySelector('.pan-canvas');
-    const hud = viewer.querySelector('.viewer-hud');
-    const label = viewer.dataset.label || '';
-    if (!canvas) return;
-
-    let scale = 1, posX = 0, posY = 0;
-    const MIN_SCALE = 0.3, MAX_SCALE = 6;
-    let isDragging = false, lastX = 0, lastY = 0;
-
-    function applyTransform() {
-      canvas.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
-      if (hud) hud.textContent = `${label} · ${scale.toFixed(2)}×`;
-    }
-    function clampScale(s) { return Math.min(MAX_SCALE, Math.max(MIN_SCALE, s)); }
-
-    viewer.addEventListener('wheel', (e) => {
-      e.preventDefault();
-      const rect = viewer.getBoundingClientRect();
-      const cx = e.clientX - rect.left - rect.width / 2;
-      const cy = e.clientY - rect.top - rect.height / 2;
-      const newScale = clampScale(scale * (1 - e.deltaY * 0.0015));
-      const ratio = newScale / scale;
-      posX = cx - (cx - posX) * ratio;
-      posY = cy - (cy - posY) * ratio;
-      scale = newScale;
-      applyTransform();
-    }, { passive: false });
-
-    viewer.addEventListener('pointerdown', (e) => {
-      isDragging = true; lastX = e.clientX; lastY = e.clientY;
-      viewer.classList.add('dragging');
-      viewer.setPointerCapture(e.pointerId);
-    });
-    viewer.addEventListener('pointermove', (e) => {
-      if (!isDragging) return;
-      posX += e.clientX - lastX; posY += e.clientY - lastY;
-      lastX = e.clientX; lastY = e.clientY;
-      applyTransform();
-    });
-    ['pointerup', 'pointerleave', 'pointercancel'].forEach(evt =>
-      viewer.addEventListener(evt, () => { isDragging = false; viewer.classList.remove('dragging'); })
-    );
-
-    const zoomIn = viewer.querySelector('[data-zoom-in]');
-    const zoomOut = viewer.querySelector('[data-zoom-out]');
-    const zoomReset = viewer.querySelector('[data-zoom-reset]');
-    if (zoomIn) zoomIn.addEventListener('click', () => { scale = clampScale(scale * 1.25); applyTransform(); });
-    if (zoomOut) zoomOut.addEventListener('click', () => { scale = clampScale(scale * 0.8); applyTransform(); });
-    if (zoomReset) zoomReset.addEventListener('click', () => { scale = 1; posX = 0; posY = 0; applyTransform(); });
-
-    applyTransform();
-  });
-  </script>
 </body>
 </html>
