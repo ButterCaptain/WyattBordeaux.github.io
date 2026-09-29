@@ -251,6 +251,17 @@
   margin-top: 2rem;
 }
 
+.proj-screenshot-grid--large {
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.proj-screenshot-grid--large .proj-screenshot img {
+  max-height: 600px;
+  width: auto;
+  object-fit: contain;
+}
+
 .proj-screenshot {
   background: var(--gray-900);
   border: 1px solid var(--gray-700);
@@ -258,6 +269,15 @@
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   transition: border-color 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.proj-screenshot-grid--large .proj-screenshot {
+  padding: 2rem;
+  background: var(--gray-800);
 }
 
 .proj-screenshot:hover {
