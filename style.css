@@ -1005,5 +1005,14 @@ a {
     grid-template-columns: 1fr;
   }
 
-  .contact-chip span { display: none; } /* icon-only on very small screens */
+  .contact-chip:not(.contact-chip--resume) span { display: none; } /* icon-only on very small screens, except resume */
+
+  .contact-chip--resume {
+    padding: 1.2rem 1.8rem;
+    font-size: 1.15rem;
+    width: 100%;
+    justify-content: center;
+    order: -1;
+    margin-bottom: 0.5rem;
+  }
 }
