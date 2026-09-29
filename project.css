@@ -253,7 +253,8 @@
 
 .proj-screenshot-grid--large {
   grid-template-columns: 1fr;
-  gap: 2.5rem;
+  gap: 3rem;
+  max-width: 100%;
 }
 
 .proj-screenshot {
@@ -263,7 +264,6 @@
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   transition: all 0.3s var(--ease);
-  cursor: pointer;
 }
 
 .proj-screenshot:hover {
@@ -275,14 +275,19 @@
 .proj-screenshot-grid--large .proj-screenshot {
   display: flex;
   flex-direction: column;
+  min-height: 500px;
 }
 
 .proj-screenshot-grid--large .proj-screenshot img {
   width: 100%;
-  height: auto;
+  height: 100%;
   max-width: 100%;
   display: block;
   border-bottom: 1px solid var(--gray-700);
+  object-fit: contain;
+  background: var(--gray-800);
+  padding: 1.5rem;
+  box-sizing: border-box;
 }
 
 .proj-screenshot figcaption {
@@ -343,72 +348,10 @@
 
 
 @media (min-width: 768px) {
-  /* Allow screenshots to sit side-by-side on larger screens */
-  .proj-screenshot-grid {
+  /* Allow screenshots to sit side-by-side on larger screens, but keep large grids stacked */
+  .proj-screenshot-grid:not(.proj-screenshot-grid--large) {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   }
-}
-
-/* ── Image Lightbox Modal ── */
-.lightbox-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.95);
-  z-index: 1000;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  backdrop-filter: blur(4px);
-}
-
-.lightbox-modal.active {
-  display: flex;
-}
-
-.lightbox-content {
-  position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
-  background: var(--gray-900);
-  border: 1px solid var(--gray-700);
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-}
-
-.lightbox-content img {
-  width: 100%;
-  height: auto;
-  display: block;
-  max-width: 100%;
-}
-
-.lightbox-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 40px;
-  height: 40px;
-  background: rgba(10, 10, 11, 0.8);
-  border: 1px solid var(--gray-600);
-  border-radius: 50%;
-  color: var(--white);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  transition: all 0.2s;
-  z-index: 10;
-}
-
-.lightbox-close:hover {
-  background: var(--scarlet);
-  border-color: var(--scarlet);
 }
 
 @media (max-width: 768px) {
