@@ -292,6 +292,30 @@ a {
   transform: scale(1.15);
 }
 
+.contact-chip--resume {
+  padding: 0.85rem 1.6rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border: 2px solid var(--scarlet);
+  background: rgba(200, 16, 46, 0.15);
+  box-shadow: 0 0 20px rgba(200, 16, 46, 0.3);
+  letter-spacing: 0.08em;
+}
+
+.contact-chip--resume i {
+  font-size: 1.3rem;
+}
+
+.contact-chip--resume:hover {
+  background: rgba(200, 16, 46, 0.25);
+  box-shadow: 0 0 30px rgba(200, 16, 46, 0.5), 0 4px 12px rgba(200, 16, 46, 0.4);
+  transform: translateY(-3px) scale(1.05);
+}
+
+.contact-chip--resume:hover i {
+  transform: scale(1.25);
+}
+
 
 .section {
   padding: var(--section-pad);
